@@ -25,7 +25,6 @@ const SearchBar = ({ api, onEvent }) => {
     e.preventDefault();
     if (!search) return;
     if (names.some((name) => name === search.toLowerCase())) {
-      console.log("it run");
       setName(search);
       const url = `${api}/cavite`;
       updateUrlAndParams(url, format);

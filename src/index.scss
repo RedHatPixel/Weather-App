@@ -10,17 +10,12 @@
   outline: none;
 }
 
-@mixin blur($var) {
-  backdrop-filter: blur($var);
-  -webkit-backdrop-filter: blur($var);
-}
-
 @mixin glass {
   background: rgba(255, 255, 255, 0.1);
-  @include blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.18);
   box-shadow: 0 8px 12px 0 rgba(255, 255, 255, 0.18);
 }
+
 @mixin dark-glass {
   @include glass;
   background: rgba(0, 0, 0, 0.6);;
@@ -357,11 +352,9 @@ $animation-duration: 2s;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  @include blur(20px);
   pointer-events: none;
   user-select: none;
   z-index: 1000;
-  @include blur(50px);
 
   .circle {
     position: relative;

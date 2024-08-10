@@ -9,6 +9,7 @@ function App() {
   const [result, setResult] = useState({
     data: null,
     loading: false,
+    name: "",
   });
 
   const handleSubmit = (value) => {
@@ -50,7 +51,11 @@ function App() {
         </div>
       )}
       <section>
-        <TopGrid data={result.data} ConvertDateToDay={ConvertDateToDay} />
+        <TopGrid
+          data={result.data}
+          ConvertDateToDay={ConvertDateToDay}
+          SearchName={result.name}
+        />
         <div className="bottomGrid">
           <div className="weather-details">
             <h2>Weather details</h2>

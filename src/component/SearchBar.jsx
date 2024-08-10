@@ -11,21 +11,38 @@ const SearchBar = ({ api, onEvent }) => {
     format
   );
 
+  const [name, setName] = useState("");
+  const names = [
+    "niko",
+    "rodmark",
+    "carlos",
+    "angelo",
+    "lucky",
+    "cambronero",
+    "zhayden",
+  ];
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!search) return;
-
-    const url = `${api}/${search}`;
-    updateUrlAndParams(url, format);
-    return;
+    if (names.some((name) => name === search.toLowerCase())) {
+      console.log("it run");
+      setName(search);
+      const url = `${api}/cavite`;
+      updateUrlAndParams(url, format);
+      return;
+    } else {
+      setName("");
+      const url = `${api}/${search}`;
+      updateUrlAndParams(url, format);
+    }
   };
 
   useEffect(() => {
     if (error) setInput("red-border");
     else setInput("");
 
-    onEvent({ data, loading });
-  }, [data, loading, error]);
+    onEvent({ data, loading, name });
+  }, [data, loading, error, name]);
 
   return (
     <section>
@@ -59,6 +76,7 @@ const SearchBar = ({ api, onEvent }) => {
 SearchBar.Proptypes = {
   api: PropTypes.string.isRequired,
   onEvent: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 export default SearchBar;

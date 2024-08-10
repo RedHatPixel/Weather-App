@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const TopGrid = ({ data, ConvertDateToDay }) => {
+const TopGrid = ({ data, ConvertDateToDay, SearchName }) => {
   const [condition, setCondition] = useState({
     area: "city",
     country: "Country",
@@ -13,15 +13,27 @@ const TopGrid = ({ data, ConvertDateToDay }) => {
 
   useEffect(() => {
     if (data) {
-      setCondition({
-        area: data.nearest_area[0].areaName[0].value,
-        country: data.nearest_area[0].country[0].value,
-        mintempC: data.weather[0].mintempC,
-        maxtempC: data.weather[0].maxtempC,
-        description: data.current_condition[0].weatherDesc[0].value,
-        date: data.current_condition[0].localObsDateTime,
-        day: ConvertDateToDay(data.weather[0].date),
-      });
+      if (SearchName) {
+        setCondition({
+          area: "Babuyan Island",
+          country: data.nearest_area[0].country[0].value,
+          mintempC: data.weather[0].mintempC,
+          maxtempC: data.weather[0].maxtempC,
+          description: data.current_condition[0].weatherDesc[0].value,
+          date: data.current_condition[0].localObsDateTime,
+          day: ConvertDateToDay(data.weather[0].date),
+        });
+      } else {
+        setCondition({
+          area: data.nearest_area[0].areaName[0].value,
+          country: data.nearest_area[0].country[0].value,
+          mintempC: data.weather[0].mintempC,
+          maxtempC: data.weather[0].maxtempC,
+          description: data.current_condition[0].weatherDesc[0].value,
+          date: data.current_condition[0].localObsDateTime,
+          day: ConvertDateToDay(data.weather[0].date),
+        });
+      }
     }
   }, [data]);
 
